@@ -117,6 +117,20 @@ ApplicationWindow {
         onSaveConnection: connectionsManager.updateConnection(settings)
     }
 
+    ConnectionGroupDialog {
+        id: connectionGroupDialog
+
+        objectName: "rdm_connection_group_dialog"
+
+        onAddNewGroup: {
+            connectionsManager.addNewGroup(name)
+        }
+
+        onEditGroup: {
+            connectionsManager.updateGroup(group)
+        }
+    }
+
     OkDialog {
         id: notification
         objectName: "rdm_qml_error_dialog"
@@ -182,6 +196,11 @@ ApplicationWindow {
         onEditConnection: {
             connectionSettingsDialog.settings = config
             connectionSettingsDialog.open()
+        }
+
+        onEditConnectionGroup: {
+            connectionGroupDialog.group = group
+            connectionGroupDialog.open()
         }
 
         Component.onCompleted: {
